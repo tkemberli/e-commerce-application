@@ -1,6 +1,7 @@
 package com.tk.store.config;
 
 import org.apache.naming.ContextAccessController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +18,8 @@ import java.util.HashSet;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    @Value("${api.version}")
+    private String apiVersion;
 
     private Contact contact(){
         return new Contact(
@@ -27,10 +30,12 @@ public class SwaggerConfig {
     }
 
     private ApiInfoBuilder apiInfoBuilder(){
+
+
         return new ApiInfoBuilder()
                 .title("Store API")
                 .description("A simple e-commerce API")
-                .version("${api.version}")
+                .version(this.apiVersion)
                 .license("MIT")
                 .contact(this.contact());
     }
