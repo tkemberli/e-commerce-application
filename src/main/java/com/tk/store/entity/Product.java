@@ -11,7 +11,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "product")
-@NoArgsConstructor
 @Data
 public class Product {
 
@@ -49,6 +48,8 @@ public class Product {
     @UpdateTimestamp
     private Date lastUpdated;
 
-    @Column(name = "category_id")
-    private long categoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private ProductCategory category;
 }
